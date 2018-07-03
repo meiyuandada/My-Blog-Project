@@ -1,0 +1,59 @@
+{% extends "base/index_base.html" %}
+{% block style %}
+    <link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% load my_tags %}
+            {% get_menu username %}
+            <div class="col-md-6">
+                <div class="article_list">
+                    {% for article in article_list %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><strong><a
+                                        href="/blog/{{ article.user.username }}/articles/{{ article.pk }}">{{ article.title }}</a></strong>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12  desc">
+                                        <div class="row">
+                                            <div class="col-md-12"><p>{{ article.desc }}</p></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <hr>
+                                                <div class="small">
+                                                    <span><a
+                                                            href="/blog/{{ article.user.username }}">{{ article.user.username }}</a>&nbsp;发布于</span>&nbsp;&nbsp;&nbsp;
+                                                    <span>{{ article.create_time|date:"Y-m-d" }}</span>&nbsp;&nbsp;&nbsp;
+                                                    <div class="icon-myself pull-right">
+                                                        <img src="/static/imgs/短信.png" width="18px" alt="">
+                                                        <span>&nbsp;评论({{ article.comment_count }})</span>
+                                                    </div>
+                                                    <div class="icon-myself pull-right">
+                                                        <img src="/static/imgs/支持.png" width="18px" alt="">
+                                                        <span>&nbsp;赞({{ article.up_count }})</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <canvas id="canvas" width="500px" height="500px"> >cccc</canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="/static/js/home1.js"></script>
+{% endblock %}

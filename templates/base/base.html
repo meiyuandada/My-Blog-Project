@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static "imgs/Smile.png" %}">
+    <link rel="stylesheet" href="{% static "Dashboard Template for Bootstrap_files/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/base_animate.css" %}">
+    {% block mystyle %}
+
+    {% endblock %}
+    <script src="{% static "Dashboard Template for Bootstrap_files/jquery.js" %}"></script>
+</head>
+<body>
+<div class="container" id="container">
+    <div class="row">
+        <div class="col-md-6">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <div class="col-md-4 col-md-offset-2">
+            <div class="animate-box">
+                <div class='body'>
+                    <div class='ears'></div>
+                    <div class='eyebrows'>
+                        <div class='left'></div>
+                        <div class='right'></div>
+                    </div>
+                    <div class='eyes'>
+                        <div class='left'></div>
+                        <div class='right'></div>
+                    </div>
+                    <div class='nose'></div>
+                    <div class='mouth'></div>
+                    <div class='whiskers'>
+                        <div class='left'></div>
+                        <div class='right'></div>
+                    </div>
+                    <div class='tongue'></div>
+                    <div class='bandana'>
+                        <div class='top'></div>
+                        <div class='bottom'></div>
+                    </div>
+                    <div class='stomach'></div>
+                </div>
+                <div class='legs'>
+                    <div class='lfront'></div>
+                    <div class='lback'></div>
+                    <div class='rfront'></div>
+                    <div class='rback'></div>
+                </div>
+                <div class='tail'></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% csrf_token %}
+{% block myscript %}
+
+{% endblock %}
+</body>
+</html>

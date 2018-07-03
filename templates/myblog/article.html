@@ -1,0 +1,116 @@
+{% extends "base/index_base.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% load my_tags %}
+            {% get_menu username %}
+            <div class="col-md-9">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h1 class="panel-title"><u><strong>{{ article.title }}</strong></u>
+                            <small>{{ article.user.username }}</small>
+                        </h1>
+                    </div>
+                    <div class="panel-body">
+                        {{ article.articledetail.content | safe }}
+                        <p id="div_digg" class="text-center">
+                            <button type="button" class="btn btn-primary btn-lg diggit btn-db">点赞
+                                <span id="diggit_count">{{ article.up_count }}</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-lg buryit btn-db">反对
+                                <span id="buryit_count">{{ article.down_count }}</span>
+                            </button>
+                        </p>
+                        <div id="digg_word" class="alert alert-info" style="display: none;" role="alert"></div>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <strong>留言板</strong>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-center">文明评论 和谐探讨</p>
+                        <!-- List group -->
+                        <ul id="comment_tree_box" class="list-group">
+                            {% tree comment_dic_view %}
+                        </ul>
+{#                        <script>#}
+{##}
+{#                            (function () {#}
+{#                                alert("-=-=-=--=-=-=-=")#}
+{#                                $.ajax({#}
+{#                                    url:"/blog/get_comment_tree/"+$("#info").attr("article_id"),#}
+{#                                    success: function (comment_list) {#}
+{#                                        console.log(comment_list);#}
+{#                                        var comment_html = "";#}
+{#                                        $.each(comment_list, function (index, comment) {#}
+{#                                            console.log(comment);#}
+{#                                            var username = comment.user_username;#}
+{#                                            var content = comment.content;#}
+{#                                            var pk = comment.pk;#}
+{#                                            var pid = comment.parent_comment_id;#}
+{##}
+{#                                            s = '<li class="list-group-item comment_tree_item" id=' + pk + '><span>' + username + '</span> <span>' + content + '</span> </li>';#}
+{##}
+{#                                            if (pid) {#}
+{#                                                $("#" + pid).append(s);#}
+{#                                            } else {#}
+{#                                                $("#comment_tree_box").append(s);#}
+{#                                            }#}
+{##}
+{#                                        })#}
+{#                                    }#}
+{#                                })#}
+{#                            })()#}
+{##}
+{##}
+{#                        </script>#}
+                        <ul class="list-group comment_list">
+                            {% for comment in comment_list %}
+                                <li class="list-group-item comment_item">
+                                    <div>
+                                        <a href="">#{{ forloop.counter }}楼</a>
+                                        <span>{{ comment.create_time|date:"Y-m-d H:i" }}</span>
+                                        <a href="/blog/{{ comment.user.username }}">{{ comment.user.username }}</a>
+                                        <a class="pull-right reply" pk="{{ comment.pk }}"
+                                           username="{{ comment.user.username }}">回复</a>
+                                    </div>
+                                    {% if comment.parent_comment_id %}
+                                        <div class="parent_comment_info well">
+                                            <a href="">@{{ comment.parent_comment.user.username }}</a>
+                                            <span>{{ comment.parent_comment.content }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <p>{{ comment.content }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <strong>评论内容：</strong>
+                    </div>
+                    <div class="panel-body">
+                        <p>昵称：<input type="text" id="tbCommentAuthor" class="author" disabled size="50"
+                                     value="{{ request.user.username }}"></p>
+                        <textarea id="comment_text" class="form-control" rows="3"></textarea>
+                        <br>
+                        <button class="btn btn-default pull-right comment_btn">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="totop" href="#"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    <div id="info" article_id="{{ article.pk }}" username="{{ request.user.username }}"></div>
+    {% csrf_token %}
+{% endblock %}
+{% block script %}
+    <script src="/static/js/article.js"></script>
+{% endblock %}

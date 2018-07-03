@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="shortcut icon" href="{% static "imgs/Smile.png" %}">
+    <link rel="stylesheet" href="{% static "css/index_base.css" %}">
+    <link rel="stylesheet" href="{% static "Dashboard Template for Bootstrap_files/bootstrap.css" %}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% block style %}
+    
+    {% endblock %}
+    <script src="{% static "Dashboard Template for Bootstrap_files/jquery.js" %}"></script>
+    <script src="{% static "Dashboard Template for Bootstrap_files/bootstrap.js" %}"></script>
+
+</head>
+<body>
+{% include "elements/navbar.html" %}
+{% block content %}
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

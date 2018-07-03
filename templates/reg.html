@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% block mystyle %}
+    <link rel="stylesheet" href="/static/css/reg.css">
+{% endblock %}
+{% block content %}
+    <form action="" novalidate>
+        <h3 class="text-center">欢迎注册</h3>
+        {% for field in form %}
+            <div class="form-group">
+                <label for="">{{ field.label }}</label>
+                {{ field }} <span class="error pull-right"></span>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <label for="avatar">头像<img class="avatar" src="/static/imgs/default.png" alt=""></label>
+
+            <input type="file" id="avatar">
+        </div>
+        <input type="button" class="btn btn-default reg_btn pull-left" value="提交"><span class="error"></span>
+    </form>
+
+{% endblock %}
+{% block myscript %}
+    <script src="/static/js/reg.js"></script>
+{% endblock %}
